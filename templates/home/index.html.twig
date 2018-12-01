@@ -9,14 +9,33 @@
 
         This friendly message is coming from:
         <ul>
-            <li>Your controller at <code><a href="{{ 'src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
+            <li>Your controller at <code><a href="{{ 'src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code>
+            </li>
+            <li>Your template at <code><a href="{{ 'templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code>
+            </li>
         </ul>
     </div>
 
     <div class="container">
-        <div class="example-wrapper">
-
+        <h2>Les derniers biens</h2>
+        <div class="row flex">
+            {% for property in properties %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="#">{{ property.title }}</a>
+                            </h5>
+                            <p class="card-text">
+                                {{ property.city }} ({{ property.postalCode }})
+                            </p>
+                            <p class="text-primary" style="font-size: 2rem; font-weight: bold;">
+                                {{ property.formattedPrice }} €
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 
