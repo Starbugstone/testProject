@@ -12,7 +12,7 @@ class Property
 {
 
     const HEAT = [
-        0 => 'Electrique',
+        0 => 'Electric',
         1 => 'Gaz'
     ];
     /**
