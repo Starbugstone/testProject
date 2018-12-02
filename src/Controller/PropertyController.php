@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class PropertyController
+ * Class AdminPropertyController
  * @package App\Controller
  */
 class PropertyController extends AbstractController
