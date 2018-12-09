@@ -11,5 +11,11 @@
             </li>
         </ul>
 
+        {% if app.user %}
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="{{ path('logout') }}" class="nav-link">Se deconnecter</a></li>
+            </ul>
+        {% endif %}
+
     </div>
 </nav>
