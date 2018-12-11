@@ -20,7 +20,7 @@ security:
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
 
             form_login:
-              check_path: login
+              check_path: /login
 
             logout:
               path: /logout
