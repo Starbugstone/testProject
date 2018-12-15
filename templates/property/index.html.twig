@@ -3,12 +3,29 @@
 {% block title %}Biens{% endblock %}
 
 {% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+                <div class="form-row">
+                    <div class="col">
+                        {{ form_row(form.minSurface) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(form.maxPrice) }}
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-primary" type="submit">Rechercher</button>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
     <div class="container my-3">
         <h1>Voir tous les biens</h1>
         <div class="row">
-            {%  for property in properties %}
+            {% for property in properties %}
                 <div class="col-md-4">
-                    {%  include 'property/_property.html.twig' %}
+                    {% include 'property/_property.html.twig' %}
                 </div>
             {% endfor %}
         </div>
