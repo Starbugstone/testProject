@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Option;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
@@ -48,7 +49,7 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("admin/property/create", name="admin.property.new")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return Response
      */
     public function new(Request $request)
     {
@@ -79,6 +80,7 @@ class AdminPropertyController extends AbstractController
      */
     public function edit(Property $property, Request $request)
     {
+
         $form = $this->createForm(PropertyType::class, $property);
 
         $form->handleRequest($request);
