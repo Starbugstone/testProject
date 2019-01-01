@@ -9,6 +9,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
+                    {%  if property.filename %}
+                        <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium')}}" alt="card-img-top" style="width: 100%; height: auto;">
+                    {% else %}
+                        <img src="{{ asset('default_images/empty.png') }}" alt="card-img-top" style="width: 100%; height: auto;">
+                    {% endif %}
                     <p>{{ property.description|nl2br }}</p>
                 </div>
                 <div class="col-md-4">
@@ -54,6 +59,11 @@
             </div>
             <div class="col-md-4">
                 <h2>Specificités</h2>
+                <ul class="list-group">
+                    {% for option in property.options %}
+                        <li class="list-group-item">{{ option.name }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
