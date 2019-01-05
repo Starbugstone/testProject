@@ -350,6 +350,16 @@ class Property
         return $this->pictures;
     }
 
+    public function getPicture()
+    {
+        if ($this->pictures->isEmpty()) {
+            return null;
+        }
+        return $this->pictures->first();
+
+
+    }
+
     public function addPicture(Picture $picture): self
     {
         if (!$this->pictures->contains($picture)) {
@@ -387,7 +397,7 @@ class Property
      */
     public function setPictureFiles($pictureFiles): self
     {
-        foreach($pictureFiles as $pictureFile){
+        foreach ($pictureFiles as $pictureFile) {
             $picture = new Picture();
             $picture->setImageFile($pictureFile);
             $this->addPicture($picture);

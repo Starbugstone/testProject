@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -49,7 +49,7 @@ class Picture
         return $this->filename;
     }
 
-    public function setFilename(string $filename): self
+    public function setFilename(?string $filename): self
     {
         $this->filename = $filename;
 
@@ -78,9 +78,11 @@ class Picture
 
     /**
      * @param File $imageFile
+     * @return Picture
      */
-    public function setImageFile(File $imageFile): void
+    public function setImageFile(File $imageFile): self
     {
         $this->imageFile = $imageFile;
+        return $this;
     }
 }
