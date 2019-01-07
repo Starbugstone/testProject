@@ -31,21 +31,36 @@ class PropertyRepository extends ServiceEntityRepository
     {
         $query = $this->findVisibleQuery();
 
-        if ($search->getMaxPrice()){
+        if ($search->getMaxPrice()) {
             $query = $query
                 ->andWhere('p.price <= :maxprice')
                 ->setParameter('maxprice', $search->getMaxPrice());
         }
 
-        if($search->getMinSurface()){
+        if ($search->getMinSurface()) {
             $query = $query
                 ->andWhere('p.surface >= :minsurface')
                 ->setParameter('minsurface', $search->getMinSurface());
         }
 
-        if($search->getOptions()->count()>0){
-            $k=0;
-            foreach ( $search->getOptions() as $option) {
+        if ($search->getLat() && $search->getLng() && $search->getDistance()) {
+            $query = $query
+                ->select('p')
+                ->andWhere('(6353 * 2 * ASIN(SQRT(
+                    POWER(SIN((p.lat - :lat) * pi()/180 / 2),
+                    2) + COS(p.lat * pi()/180 ) * COS(:lat *
+                    pi()/180) * POWER(SIN((p.lng – :lng) *
+                    pi()/180 / 2), 2) )))
+                    <= :distance)'
+                )
+                ->setParameter('lat', $search->getLat())
+                ->setParameter('lng', $search->getLng())
+                ->setParameter('distance', $search->getDistance());
+        }
+
+        if ($search->getOptions()->count() > 0) {
+            $k = 0;
+            foreach ($search->getOptions() as $option) {
                 $k++;
                 $query = $query
                     ->andWhere(":option$k MEMBER OF p.options")
@@ -68,11 +83,13 @@ class PropertyRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    private function findVisibleQuery():QueryBuilder
+    private function findVisibleQuery(): QueryBuilder
     {
         return $this->createQueryBuilder('p')
             ->where('p.sold = false');
     }
+
+
 // /**
 //  * @return Property[] Returns an array of Property objects
 //  */
